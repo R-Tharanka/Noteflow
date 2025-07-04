@@ -134,6 +134,8 @@ To use the Google Drive API and OAuth features:
 
 ## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
+<!--
 ## 👤 Author
-Personal project by [R-Tharanka](https://github.com/R-Tharanka), [Mayomibhagya](https://github.com/Mayomibhagya)
+Personal project by [R-Tharanka](https://github.com/R-Tharanka), [Mayomibhagya](https://github.com/Mayomibhagya) 
+-->
+
