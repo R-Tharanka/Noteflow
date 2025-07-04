@@ -1,4 +1,4 @@
-# Noteflow 🧠 - Your Personal Academic Companion
+# Noteflow - Your Personal Academic Companion
 
 A private, personal web application to help you stay organized, study smarter, and manage all your university-related content in one place.
 
