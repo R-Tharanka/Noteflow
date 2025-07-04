@@ -133,7 +133,7 @@ To use the Google Drive API and OAuth features:
 - [ ] Deploy production version
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/R-Tharanka/Noteflow/blob/main/LICENSE) file for details.
 <!--
 ## 👤 Author
 Personal project by [R-Tharanka](https://github.com/R-Tharanka), [Mayomibhagya](https://github.com/Mayomibhagya) 
