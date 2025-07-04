@@ -35,6 +35,17 @@ return [
             'driver'   => 'mongodb',
             'dsn'      => env('DB_URL'),
             'database' => env('DB_DATABASE', 'noteflow'),
+            'options'  => [
+                'appname' => 'Noteflow App',
+                'tls' => true,
+                'tlsAllowInvalidCertificates' => true,
+                'tlsAllowInvalidHostnames' => true,
+                'retryWrites' => false, // Disable retry writes to troubleshoot connection issues
+                'serverSelectionTimeoutMS' => 5000,
+                'connectTimeoutMS' => 10000,
+                'serverSelectionTryOnce' => false, // Try multiple times to establish a connection
+                'uuidRepresentation' => 'standard',
+            ],
         ],
 
 
