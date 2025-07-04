@@ -10,39 +10,36 @@ class MongoTestController extends Controller
     public function index()
     {
         try {
-            // Get database connection information
-            $connectionName = config('database.default');
-            $dbConfig = config('database.connections.' . $connectionName);
+            // Use the MongoDB PHP extension directly to test the connection
+            ob_start();
             
-            // Extract connection details (hiding password)
-            $connectionInfo = [
-                'driver' => $dbConfig['driver'],
-                'database' => $dbConfig['database'],
-                'dsn' => preg_replace('/(:.*@)/', ':***@', $dbConfig['dsn']), // Hide password
-                'options' => $dbConfig['options'],
-            ];
+            $dsn = config('database.connections.mongodb.dsn');
+            $options = config('database.connections.mongodb.options');
             
-            // Check if we can get collections
-            $collections = DB::connection($connectionName)->listCollections();
-            $collectionNames = [];
+            $client = new \MongoDB\Driver\Manager($dsn, $options);
             
-            foreach ($collections as $collection) {
-                $collectionNames[] = $collection->getName();
-            }
+            // Execute a simple ping command to check connection
+            $command = new \MongoDB\Driver\Command(['ping' => 1]);
+            $result = $client->executeCommand('admin', $command);
+            
+            // If we get here, the connection was successful
+            $output = ob_get_clean();
             
             return response()->json([
                 'connection' => 'successful',
-                'database_name' => $dbConfig['database'],
-                'connection_info' => $connectionInfo,
-                'collections' => $collectionNames,
-                'version' => DB::connection($connectionName)->getMongoClient()->selectServer()->getInfo()->getVersion(),
+                'message' => 'MongoDB connection is working',
+                'database' => config('database.connections.mongodb.database'),
+                'connection_type' => 'MongoDB Atlas',
+                'php_version' => phpversion(),
+                'mongodb_version' => phpversion('mongodb')
             ]);
             
         } catch (\Exception $e) {
+            $output = ob_get_clean();
+            
             return response()->json([
                 'connection' => 'failed',
-                'error' => $e->getMessage(),
-                'error_trace' => $e->getTraceAsString(),
+                'error' => $e->getMessage()
             ], 500);
         }
     }
